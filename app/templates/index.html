@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %} NeoLog - Index Page {% endblock %}
+
+{% block content %}
+{% for post in posts.items %}
+    <div class="post">
+        <h4>{{ post.title }}</h4>
+        <p>
+            {{ post.content[:100] }}
+            <a href="/not">Read more</a>
+        </p>
+        <p> Author: {{ user.query.get(post.user_id).username }} </p>
+    </div>
+{% endfor %}
+{% if posts.has_prev %}
+    <a href="{{ url_for('index.index', page=posts.prev_num) }}">←</a>
+{% endif %}
+{% if posts.has_next %}
+    <a href="{{ url_for('index.index', page=posts.next_num) }}">→</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,79 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #fafae5;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #1e1e1c;
+  color: white;
+  padding: 5px 10px;
+  height: 80px;
+}
+
+header p {
+  margin: 10px 5px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+header a {
+  margin: 5px;
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  background: white;
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  background: #1e1e1c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #333;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.post {
+  width: calc(100% - 20px);
+  background: white;
+  color: black;
+  border: 2px solid #ccc;
+  padding: 10px;
+}
