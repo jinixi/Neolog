@@ -18,24 +18,23 @@ def sign_up():
         username = username.strip().lower()
 
         if not username or not password:
-            content = "Username and password are required."
-            return render_template("custom.html", title='Message', message=content)
+            return render_template("error.html")
         
         if User.query.filter_by(username=username).first():
-            content = f"Username already taken. <a href='{ url_for('auth.sign_up') }'>Try another.</a>"
-            return render_template("custom.html", title='Message', message=content)
+            return render_template("error.html")
         
-        error = validate_username(username) or validate_password(password)
-        if error:
-            return render_template("custom.html", title='Message', message=error)
+        if validate_username(username) or validate_password(password):
+            return render_template("error.html")
 
         new_user = User(username=username)
         new_user.set_password(password)
         db.session.add(new_user)
         db.session.commit()
 
-        content = f"Success. Now try to <a href='{ url_for('auth.sign_in') }'>sign in</a>."
-        return render_template("custom.html", title='Message', message=content)
+        user = User.query.filter_by(username=username).first()
+        login_user(user, remember=True)
+
+        return redirect(url_for('index.index'))
 
     return render_template('sign-up.html')
 
@@ -54,8 +53,7 @@ def sign_in():
         if user and user.check_password(password):
             login_user(user, remember=True)
             return redirect(url_for("index.index"))
-        content = f"User not found or invalid creditaliance. <a href='{ url_for('auth.sign_in') }'>Try again.</a>"
-        return render_template("custom.html", title='Message', message=content)
+        return render_template("error.html")
 
     return render_template("sign-in.html")
 
