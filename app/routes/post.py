@@ -31,3 +31,9 @@ def post_page(id):
     
     author = User.query.get(post.user_id)
     return render_template("post.html", post=post, author=author)
+
+@post_bp.route("/post/publications/<int:page>")
+@post_bp.route("/post/publications")
+def publications(page=1):
+    posts = Post.query.filter_by(user_id=current_user.id).paginate(page=page, per_page=5, error_out=False)
+    return render_template("publications.html", posts=posts)
